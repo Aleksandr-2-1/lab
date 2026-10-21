@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+
+actor "Специалист по учёту" as S
+actor "Ответственный сотрудник" as E
+
+rectangle "Система учёта оборудования" {
+  usecase "Добавить оборудование" as U1
+  usecase "Просмотреть оборудование" as U2
+  usecase "Изменить данные" as U3
+  usecase "Сообщить о неисправности" as U4
+  usecase "Вернуть оборудование" as U5
+}
+
+S --> U1
+S --> U2
+S --> U3
+E --> U2
+E --> U4
+E --> U5
+
+@enduml
