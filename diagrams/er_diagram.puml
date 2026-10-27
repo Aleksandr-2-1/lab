@@ -1,0 +1,103 @@
+@startuml
+left to right direction
+hide circle
+skinparam linetype ortho
+
+skinparam entity {
+    BackgroundColor #F7E5E5
+    BorderColor #DCCACA
+}
+
+entity "roles" as roles {
+    * role_id : INTEGER <<PK>>
+    --
+    name : TEXT
+}
+
+entity "users" as users {
+    * user_id : INTEGER <<PK>>
+    --
+    login : TEXT
+    password_hash : TEXT
+    full_name : TEXT
+    role_id : INTEGER <<FK>>
+}
+
+entity "departments" as departments {
+    * id : INTEGER <<PK>>
+    --
+    name : TEXT
+}
+
+entity "employees" as employees {
+    * id : INTEGER <<PK>>
+    --
+    full_name : TEXT
+    position : TEXT
+    department_id : INTEGER <<FK>>
+    user_id : INTEGER <<FK>>
+}
+
+entity "categories" as categories {
+    * id : INTEGER <<PK>>
+    --
+    name : TEXT
+}
+
+entity "equipment" as equipment {
+    * id : INTEGER <<PK>>
+    --
+    inventory_number : TEXT
+    name : TEXT
+    serial_number : TEXT
+    manufacturer : TEXT
+    model : TEXT
+    acquisition_date : TEXT
+    cost : REAL
+    status : TEXT
+    department_id : INTEGER <<FK>>
+    category_id : INTEGER <<FK>>
+    employee_id : INTEGER <<FK>>
+}
+
+entity "movements" as movements {
+    * id : INTEGER <<PK>>
+    --
+    equipment_id : INTEGER <<FK>>
+    employee_id : INTEGER <<FK>>
+    user_id : INTEGER <<FK>>
+    previous_location : TEXT
+    new_location : TEXT
+    movement_date : TEXT
+    return_date : TEXT
+    reason : TEXT
+}
+
+entity "malfunction_reports" as malfunction_reports {
+    * report_id : INTEGER <<PK>>
+    --
+    equipment_id : INTEGER <<FK>>
+    user_id : INTEGER <<FK>>
+    description : TEXT
+    status : TEXT
+    created_at : TEXT
+    resolved_at : TEXT
+}
+
+roles ||--o{ users : 1:N
+
+departments ||--o{ employees : 1:N
+departments ||--o{ equipment : 1:N
+users ||--o| employees : account
+
+categories ||--o{ equipment : 1:N
+employees ||--o{ equipment : responsible for
+
+equipment ||--o{ movements : 1:N
+employees ||--o{ movements : 1:N
+users ||--o{ movements : records
+
+equipment ||--o{ malfunction_reports : 1:N
+users ||--o{ malfunction_reports : submits
+
+@enduml
