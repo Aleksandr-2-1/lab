@@ -1,22 +1,38 @@
+```plantuml
 @startuml
 left to right direction
 
-actor "Специалист по учёту" as S
-actor "Ответственный сотрудник" as E
+actor "Специалист по учёту" as Specialist
+actor "Ответственный сотрудник" as Employee
+actor "Администратор" as Admin
 
-rectangle "Система учёта оборудования" {
-  usecase "Добавить оборудование" as U1
-  usecase "Просмотреть оборудование" as U2
-  usecase "Изменить данные" as U3
-  usecase "Сообщить о неисправности" as U4
-  usecase "Вернуть оборудование" as U5
-}
+    usecase "Вход в систему" as Login1
+    usecase "Вход в систему" as Login2
+    usecase "Вход в систему" as Login3
+    usecase "Добавить оборудование" as AddEquipment
+    usecase "Просмотреть оборудование" as ViewEquipment
+    usecase "Изменить данные" as EditEquipment
+    usecase "Сообщить о неисправности" as ReportError
+    usecase "Вернуть оборудование" as ReturnEquipment
+    usecase "Добавить пользователя" as AddUser
+    usecase "Удалить пользователя" as DeleteUser
 
-S --> U1
-S --> U2
-S --> U3
-E --> U2
-E --> U4
-E --> U5
+
+Specialist -- Login1
+Employee -- Login2
+Admin -- Login3
+
+Login1 -- AddEquipment
+Login1 -- ViewEquipment
+Login1 -- EditEquipment
+
+Login2 -- ViewEquipment
+Login2 -- ReportError
+Login2 -- ReturnEquipment
+
+Login3 -- AddUser
+Login3 -- DeleteUser
+
 
 @enduml
+```
