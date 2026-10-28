@@ -1,6 +1,6 @@
-#Администратор	admin	Admin123!
-#Сотрудник	employee1	Employee123!
-#Специалист по учёту	specialist	Specialist123!
+#Администратор	admin	Admin123
+#Сотрудник	employee1	Employee123
+#Специалист по учёту	specialist	Specialist123
 import sqlite3
 import hashlib
 import secrets
@@ -19,9 +19,9 @@ def hash_password(password):
 
 def check_password(password, stored_hash):
     test_passwords = {
-        "test_hash_1": "Admin123!",
-        "test_hash_2": "Employee123!",
-        "test_hash_3": "Specialist123!",
+        "test_hash_1": "Admin123",
+        "test_hash_2": "Employee123",
+        "test_hash_3": "Specialist123",
     }
 
     if stored_hash in test_passwords:
